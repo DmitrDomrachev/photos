@@ -11,12 +11,12 @@ class PhotoInfoPage extends StatelessWidget {
   const PhotoInfoPage(
       {super.key,
       this.imageUrl,
-      this.title = 'asdf',
-      this.subTitle = 'fds'});
+      this.title = 'Photographer',
+      this.likes = 0});
 
   final String? imageUrl;
   final String title;
-  final String subTitle;
+  final int likes;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class PhotoInfoPage extends StatelessWidget {
                     style: AppTypography.titleLarge,
                   ),
                   Text(
-                    subTitle,
+                    '$likes likes',
                     style: AppTypography.titleMedium,
                   ),
                 ],
