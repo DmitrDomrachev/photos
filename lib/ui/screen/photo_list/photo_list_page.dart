@@ -5,7 +5,7 @@ import 'package:photos/res/theme/app_typography.dart';
 import 'package:photos/ui/screen/photo_list/photo_list_page_widget_model.dart';
 
 class PhotoListPage extends ElementaryWidget<PhotoListPageWidgetModel> {
-  PhotoListPage({
+  const PhotoListPage({
     Key? key,
     WidgetModelFactory wmFactory = photoListPageWidgetModelFactory,
   }) : super(wmFactory, key: key);
@@ -13,47 +13,54 @@ class PhotoListPage extends ElementaryWidget<PhotoListPageWidgetModel> {
   @override
   Widget build(PhotoListPageWidgetModel wm) {
     return CustomScrollView(
+    controller: wm.controller,
       slivers: [
-        const CupertinoSliverNavigationBar(
-          largeTitle: Text(
+        CupertinoSliverNavigationBar(
+          leading: CupertinoButton(
+            onPressed: () {
+              wm.addPhotos();
+            },
+            child: const Text('add'),
+          ),
+          largeTitle: const Text(
             'Photos',
             style: AppTypography.appBarLargeTitle,
           ),
-          middle: Text(
+          middle: const Text(
             'Photos',
             style: AppTypography.appBarMiddle,
           ),
           alwaysShowMiddle: false,
-          backgroundColor: Color.fromRGBO(255, 255, 255, 0.75),
-          border: Border(bottom: BorderSide(color: Color.fromRGBO(0, 0, 0, 0))),
+          backgroundColor: const Color.fromRGBO(255, 255, 255, 0.75),
+          border: const Border(bottom: BorderSide(color: Color.fromRGBO(0, 0, 0, 0))),
         ),
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          sliver: FutureBuilder<List<Photo>>(
-              future: wm.getPhotos(),
-              builder: (context, snapshot) {
-                return SliverGrid(
 
-                    delegate: SliverChildBuilderDelegate(childCount: snapshot.data?.length,
+        EntityStateNotifierBuilder(listenableEntityState: wm.photos, builder: (_, data){
+          return SliverPadding(
+            padding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            sliver: SliverGrid(
+                delegate: SliverChildBuilderDelegate(
+                    childCount: data?.length ?? 0,
                         (BuildContext _, int index) {
                       return ImageHolder(
                         key: Key(index.toString()),
                         image: Image.network(
-                          snapshot.data?[index].url ?? '',
+                          data![index].url,
                           fit: BoxFit.cover,
                         ),
-                        title: snapshot.data?[index].username ?? 'username',
-                        subTitle: '${snapshot.data?[index].likes ?? -1} likes',
+                        title: data[index].username,
+                        subTitle: '${data[index].likes} likes',
                       );
                     }),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 24,
-                      crossAxisSpacing: 24,
-                    ));
-              }),
-        )
+                gridDelegate:
+                const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 24,
+                  crossAxisSpacing: 24,
+                )),
+          );
+        }),
       ],
     );
   }

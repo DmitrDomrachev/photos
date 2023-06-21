@@ -7,14 +7,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoApp(
+    return CupertinoApp(
       title: 'Flutter Demo',
-      theme: CupertinoThemeData(
+      theme: const CupertinoThemeData(
         brightness: Brightness.light,
       ),
       home: CupertinoPageScaffold(
-        child: PhotoInfoPage(), //Photo detail page
-        // child: PhotoListPage(), //Photos list page
+        // child: PhotoInfoPage(), //Photo detail page
+        child: PhotoListPage(), //Photos list page
       ),
     );
   }
