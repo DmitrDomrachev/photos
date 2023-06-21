@@ -7,7 +7,7 @@ class PhotoListPageModel extends ElementaryModel {
 
   PhotoListPageModel(this._photoRepository);
 
-  Future<List<Photo>> getPhotos({int page = 1}) async {
+  Future<Iterable<Photo>> getPhotos({int page = 1}) async {
     return _photoRepository.getPhotos(page);
   }
 }

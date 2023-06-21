@@ -1,7 +1,9 @@
+import 'package:photos/data/api/photo_client.dart';
+import 'package:photos/data/repository/photo_mapper.dart';
 import 'package:photos/domain/photo.dart';
 
 abstract interface class IPhotoRepository {
-  Future<List<Photo>> getPhotos(int page, {int photoPerPage = 10});
+  Future<Iterable<Photo>> getPhotos(int page, {int photoPerPage = 10});
 }
 
 class PhotoRepositoryDemo implements IPhotoRepository {
@@ -20,5 +22,18 @@ class PhotoRepositoryDemo implements IPhotoRepository {
       throw Exception();
     }
     return await Future.delayed(const Duration(seconds: 1), () => photos);
+  }
+}
+
+class WebPhotoRepository implements IPhotoRepository {
+  final PhotoClient _client;
+
+  WebPhotoRepository(this._client);
+
+  @override
+  Future<Iterable<Photo>> getPhotos(int page, {int photoPerPage = 10}) async {
+    return await _client
+        .getPhotos(page, photoPerPage)
+        .then((value) => value.map(mapPhoto));
   }
 }
