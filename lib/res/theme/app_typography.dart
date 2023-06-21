@@ -15,6 +15,12 @@ class AppTypography {
     fontSize: 20,
     color: Color.fromRGBO(0, 0, 0, 1),
   );
+  static const appBarButton = TextStyle(
+    fontFamily: 'Manrope',
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    color: Color.fromRGBO(255, 255, 255, 1),
+  );
   static const labelMedium = TextStyle(
     fontFamily: 'Manrope',
     fontWeight: FontWeight.w700,
@@ -26,5 +32,18 @@ class AppTypography {
     fontWeight: FontWeight.w400,
     fontSize: 10,
     color: Color.fromRGBO(255, 255, 255, 1),
+  );
+
+  static const titleLarge = TextStyle(
+    fontFamily: 'Manrope',
+    fontWeight: FontWeight.w700,
+    fontSize: 26,
+    color: Color.fromRGBO(0, 0, 0, 1),
+  );
+  static const titleMedium = TextStyle(
+    fontFamily: 'Manrope',
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
+    color: Color.fromRGBO(0, 0, 0, 1),
   );
 }
