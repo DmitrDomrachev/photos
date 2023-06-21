@@ -10,12 +10,11 @@ import 'package:photos/res/theme/app_typography.dart';
 class PhotoInfoPage extends StatelessWidget {
   const PhotoInfoPage(
       {super.key,
-      this.imageUrl =
-          'https://w7.pngwing.com/pngs/67/315/png-transparent-flutter-hd-logo-thumbnail.png',
-      this.title = 'Flutter',
-      this.subTitle = '9 likes'});
+      this.imageUrl,
+      this.title = 'asdf',
+      this.subTitle = 'fds'});
 
-  final String imageUrl;
+  final String? imageUrl;
   final String title;
   final String subTitle;
 
@@ -32,14 +31,14 @@ class PhotoInfoPage extends StatelessWidget {
               child: SizedBox(
                 height: MediaQuery.of(context).size.height / 2.3,
                 width: MediaQuery.of(context).size.width,
-                child: Image.network(
-                  imageUrl,
+                child: imageUrl == null ? ColoredBox(color: Color.fromRGBO(50, 50, 50, 1),) : Image.network(
+                  imageUrl!,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.symmetric(vertical: 21, horizontal: 27),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
