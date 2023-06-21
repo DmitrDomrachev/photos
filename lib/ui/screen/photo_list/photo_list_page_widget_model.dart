@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:elementary/elementary.dart';
 import 'package:flutter/widgets.dart';
-import 'package:photos/data/repository/photo_repository.dart';
 import 'package:photos/domain/photo.dart';
 import 'package:photos/ui/screen/photo_list/photo_list_page.dart';
 import 'package:photos/ui/screen/photo_list/photo_list_page_model.dart';
@@ -14,32 +11,54 @@ PhotoListPageWidgetModel photoListPageWidgetModelFactory(BuildContext context) {
 }
 
 class PhotoListPageWidgetModel
-    extends WidgetModel<PhotoListPage, PhotoListPageModel> {
+    extends WidgetModel<PhotoListPage, PhotoListPageModel>
+    implements IPhotoPageWM {
   PhotoListPageWidgetModel(super.model);
 
   final List<Photo> _photoList = [];
-  int currentPage = 1;
-  final controller = ScrollController();
-  EntityStateNotifier<List<Photo>> photos = EntityStateNotifier();
+  final _controller = ScrollController();
+  final EntityStateNotifier<List<Photo>> _photos = EntityStateNotifier();
+  int _currentPage = 0;
+
+  @override
+  get controller => _controller;
+
+  @override
+  ListenableState<EntityState<List<Photo>?>> get photos => _photos;
 
   @override
   void initWidgetModel() {
     super.initWidgetModel();
-    controller.addListener(_scrollListener);
-    addPhotos();
+    _controller.addListener(_scrollListener);
+    _addPhotos();
   }
 
-  void addPhotos() async {
-    final newPhotos = await model.getPhotos(page: currentPage);
-    _photoList.addAll(newPhotos);
-    photos.content(_photoList);
-    currentPage++;
-  }
-
-  void _scrollListener(){
-    if (controller.offset >= controller.position.maxScrollExtent &&
-        !controller.position.outOfRange) {
-      addPhotos();
+  void _addPhotos() async {
+    try {
+      _photos.loading(_photos.value?.data);
+      final newPhotos = await model.getPhotos(page: _currentPage);
+      _photoList.addAll(newPhotos);
+      _photos.content(_photoList);
+    } on Exception catch (err) {
+      _photos.error(err, _photos.value?.data);
     }
   }
+
+  void _scrollListener() {
+    if (_controller.offset >= _controller.position.maxScrollExtent &&
+        !_controller.position.outOfRange) {
+      _incrementCurrentPage();
+      _addPhotos();
+    }
+  }
+
+  void _incrementCurrentPage() {
+    _currentPage++;
+  }
+}
+
+abstract interface class IPhotoPageWM extends IWidgetModel {
+  ListenableState<EntityState<List<Photo>?>> get photos;
+
+  ScrollController get controller;
 }
