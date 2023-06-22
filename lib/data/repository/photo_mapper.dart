@@ -1,10 +1,12 @@
-import 'package:photos/data/dto/photo_data.dart';
+import 'package:photos/data/model/photo_data.dart';
 import 'package:photos/domain/photo.dart';
 
-Photo mapPhoto(PhotoData photo) {
+Photo mapPhoto(dynamic photo) {
+  final photoData = photo as PhotoData;
   return Photo(
-      url: photo.urls.full,
-      id: photo.id,
-      username: photo.user.username,
-      likes: photo.likes);
+    url: photoData.urls.full,
+    id: photoData.id,
+    username: photoData.user.username,
+    likes: photoData.likes,
+  );
 }

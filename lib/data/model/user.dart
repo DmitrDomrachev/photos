@@ -1,8 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-
-import 'profile_image.dart';
-import 'social.dart';
-import 'user_links.dart';
+import 'package:photos/data/model/profile_image.dart';
+import 'package:photos/data/model/social.dart';
+import 'package:photos/data/model/user_links.dart';
 
 part 'user.g.dart';
 
@@ -29,9 +28,8 @@ class User {
   Social? social;
 
   User({
-    this.id,
+    required this.username, this.id,
     this.updatedAt,
-    required this.username,
     this.name,
     this.firstName,
     this.lastName,

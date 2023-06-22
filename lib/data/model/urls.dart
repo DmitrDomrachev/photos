@@ -12,8 +12,7 @@ class Urls {
   String? smallS3;
 
   Urls({
-    this.raw,
-    required this.full,
+    required this.full, this.raw,
     this.regular,
     this.small,
     this.thumb,

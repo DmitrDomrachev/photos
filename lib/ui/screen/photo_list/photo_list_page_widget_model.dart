@@ -10,21 +10,24 @@ PhotoListPageWidgetModel photoListPageWidgetModelFactory(BuildContext context) {
   return PhotoListPageWidgetModel(model);
 }
 
+//TODO: обработать случай, в котором все доступные для списка данные получены
+
 class PhotoListPageWidgetModel
     extends WidgetModel<PhotoListPage, PhotoListPageModel>
     implements IPhotoPageWM {
-  PhotoListPageWidgetModel(super.model);
-
   final List<Photo> _photoList = [];
   final _controller = ScrollController();
   final EntityStateNotifier<List<Photo>> _photos = EntityStateNotifier();
-  int _currentPage = 0;
 
   @override
   get controller => _controller;
 
   @override
   ListenableState<EntityState<List<Photo>?>> get photos => _photos;
+
+  int _currentPage = 0;
+
+  PhotoListPageWidgetModel(super.model);
 
   @override
   void initWidgetModel() {
@@ -33,7 +36,7 @@ class PhotoListPageWidgetModel
     _addPhotos();
   }
 
-  void _addPhotos() async {
+  Future<void> _addPhotos() async {
     try {
       _photos.loading(_photos.value?.data);
       final newPhotos = await model.getPhotos(page: _currentPage);

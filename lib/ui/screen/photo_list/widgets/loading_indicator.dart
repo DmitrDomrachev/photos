@@ -9,13 +9,14 @@ class LoadingIndicator extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 25),
       sliver: SliverToBoxAdapter(
         child: Center(
-            child: SizedBox(
-              width: 22,
-              height: 22,
-              child: CupertinoActivityIndicator(
-                color: Color.fromRGBO(0, 0, 0, 1),
-              ),
-            )),
+          child: SizedBox(
+            width: 22,
+            height: 22,
+            child: CupertinoActivityIndicator(
+              color: Color.fromRGBO(0, 0, 0, 1),
+            ),
+          ),
+        ),
       ),
     );
   }

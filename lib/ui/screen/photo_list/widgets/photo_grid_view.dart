@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:photos/domain/photo.dart';
-import 'widgets.dart';
+import 'package:photos/ui/screen/photo_list/widgets/image_holder.dart';
 
 class PhotoGridView extends StatelessWidget {
   const PhotoGridView({super.key, this.data});
@@ -12,24 +12,26 @@ class PhotoGridView extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       sliver: SliverGrid(
-          delegate: SliverChildBuilderDelegate(childCount: data?.length ?? 0,
-              (BuildContext _, int index) {
+        delegate: SliverChildBuilderDelegate(
+          childCount: data?.length ?? 0,
+          (_, index) {
             return ImageHolder(
               key: ValueKey(index.toString()),
               image: Image.network(
                 data![index].url,
-                //можем использовать ! , так как указали childCount
                 fit: BoxFit.cover,
               ),
               title: data![index].username,
               subTitle: '${data![index].likes} likes',
             );
-          }),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 24,
-            crossAxisSpacing: 24,
-          )),
+          },
+        ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 24,
+          crossAxisSpacing: 24,
+        ),
+      ),
     );
   }
 }

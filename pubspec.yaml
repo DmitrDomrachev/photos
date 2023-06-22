@@ -22,10 +22,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
   retrofit_generator: ^7.0.1+1
   json_serializable: ^6.7.0
   build_runner: ^2.4.5
+  surf_lint_rules: 2.1.0
 
 flutter:
   uses-material-design: true

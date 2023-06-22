@@ -3,7 +3,7 @@ import 'package:photos/res/theme/app_typography.dart';
 
 class ImageHolder extends StatelessWidget {
   const ImageHolder(
-      {super.key, required this.image, this.title, this.subTitle});
+      {required this.image, super.key, this.title, this.subTitle,});
 
   final Image image;
   final String? title;

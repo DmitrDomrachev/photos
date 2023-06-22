@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:photos/data/model/photo_datum_links.dart';
+import 'package:photos/data/model/sponsorship.dart';
+import 'package:photos/data/model/topic_submissions.dart';
+import 'package:photos/data/model/urls.dart';
+import 'package:photos/data/model/user.dart';
 
-import 'photo_datum_links.dart';
-import 'sponsorship.dart';
-import 'topic_submissions.dart';
-import 'urls.dart';
-import 'user.dart';
 
 part 'photo_data.g.dart';
 
@@ -32,7 +32,7 @@ class PhotoData {
 
   PhotoData({
     required this.id,
-    this.slug,
+    required this.urls, required this.likes, required this.user, this.slug,
     this.createdAt,
     this.updatedAt,
     this.promotedAt,
@@ -42,14 +42,11 @@ class PhotoData {
     this.blurHash,
     this.description,
     this.altDescription,
-    required this.urls,
     this.links,
-    required this.likes,
     this.likedByUser,
     this.currentUserCollections,
     this.sponsorship,
     this.topicSubmissions,
-    required this.user,
   });
 
   factory PhotoData.fromJson(Map<String, dynamic> json) =>

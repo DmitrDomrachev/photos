@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:photos/data/dto/arts_culture.dart';
+import 'package:photos/data/model/arts_culture.dart';
 
 
 part 'topic_submissions.g.dart';

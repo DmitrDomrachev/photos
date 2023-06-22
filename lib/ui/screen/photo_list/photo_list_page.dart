@@ -2,7 +2,8 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:photos/res/theme/app_typography.dart';
 import 'package:photos/ui/screen/photo_list/photo_list_page_widget_model.dart';
-import 'widgets/widgets.dart';
+import 'package:photos/ui/screen/photo_list/widgets/loading_indicator.dart';
+import 'package:photos/ui/screen/photo_list/widgets/photo_grid_view.dart';
 
 class PhotoListPage extends ElementaryWidget<IPhotoPageWM> {
   const PhotoListPage({
