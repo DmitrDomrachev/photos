@@ -18,15 +18,12 @@ class PhotoGridView extends StatelessWidget {
           (_, index) {
             return ImageHolder(
               key: ValueKey(index.toString()),
-              image: Image.network(
-                data![index].url,
-                fit: BoxFit.cover,
-              ),
+              imageUrl: data![index].url,
               title: data![index].username,
               subTitle: '${data![index].likes} likes',
               onPressed: () {
                 onPressed(data![index]);
-              } ,
+              },
             );
           },
         ),

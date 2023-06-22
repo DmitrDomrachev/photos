@@ -26,7 +26,7 @@ class PhotoListPageWidgetModel
   @override
   ListenableState<EntityState<List<Photo>?>> get photos => _photos;
 
-  int _currentPage = 0;
+  int _currentPage = 1;
 
   PhotoListPageWidgetModel(super.model);
 
