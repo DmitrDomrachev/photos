@@ -1,5 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:photos/domain/photo.dart';
 import 'package:photos/ui/screen/photo_list/photo_list_page.dart';
 import 'package:photos/ui/screen/photo_list/photo_list_page_model.dart';
@@ -36,6 +37,18 @@ class PhotoListPageWidgetModel
     _addPhotos();
   }
 
+  @override
+  void navigateToPhotoInfo(Photo photo) {
+    context.goNamed(
+      'info',
+      queryParameters: <String, String>{
+        'imageUrl': photo.url,
+        'title': photo.username,
+        'likes': photo.likes.toString(),
+      },
+    );
+  }
+
   Future<void> _addPhotos() async {
     try {
       _photos.loading(_photos.value?.data);
@@ -64,4 +77,6 @@ abstract interface class IPhotoPageWM extends IWidgetModel {
   ListenableState<EntityState<List<Photo>?>> get photos;
 
   ScrollController get controller;
+
+  void navigateToPhotoInfo(Photo photo);
 }
