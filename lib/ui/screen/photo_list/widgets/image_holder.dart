@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:photos/res/theme/app_typography.dart';
 
@@ -28,11 +29,6 @@ class ImageHolder extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                const Expanded(
-                  child: ColoredBox(
-                    color: Color.fromRGBO(0, 0, 0, 0.2),
-                  ),
-                ),
                 Image.network(
                   imageUrl,
                   fit: BoxFit.fill,

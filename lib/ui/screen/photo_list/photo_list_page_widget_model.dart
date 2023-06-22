@@ -17,11 +17,7 @@ class PhotoListPageWidgetModel
     extends WidgetModel<PhotoListPage, PhotoListPageModel>
     implements IPhotoPageWM {
   final List<Photo> _photoList = [];
-  final _controller = ScrollController();
   final EntityStateNotifier<List<Photo>> _photos = EntityStateNotifier();
-
-  @override
-  get controller => _controller;
 
   @override
   ListenableState<EntityState<List<Photo>?>> get photos => _photos;
@@ -31,9 +27,20 @@ class PhotoListPageWidgetModel
   PhotoListPageWidgetModel(super.model);
 
   @override
+  bool onNotification(Notification notification) {
+    if (notification is ScrollEndNotification) {
+      if (notification.metrics.pixels == notification.metrics.maxScrollExtent) {
+        _incrementCurrentPage();
+        _addPhotos();
+        return true;
+      }
+    }
+    return true;
+  }
+
+  @override
   void initWidgetModel() {
     super.initWidgetModel();
-    _controller.addListener(_scrollListener);
     _addPhotos();
   }
 
@@ -60,14 +67,6 @@ class PhotoListPageWidgetModel
     }
   }
 
-  void _scrollListener() {
-    if (_controller.offset >= _controller.position.maxScrollExtent &&
-        !_controller.position.outOfRange) {
-      _incrementCurrentPage();
-      _addPhotos();
-    }
-  }
-
   void _incrementCurrentPage() {
     _currentPage++;
   }
@@ -76,7 +75,7 @@ class PhotoListPageWidgetModel
 abstract interface class IPhotoPageWM extends IWidgetModel {
   ListenableState<EntityState<List<Photo>?>> get photos;
 
-  ScrollController get controller;
-
   void navigateToPhotoInfo(Photo photo);
+
+  bool onNotification(Notification notification);
 }
