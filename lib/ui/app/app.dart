@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:photos/ui/screen/photo_info/photo_info_page.dart';
 import 'package:photos/ui/screen/photo_list/photo_list_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -13,8 +12,8 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
       ),
       home: CupertinoPageScaffold(
-        child: PhotoInfoPage(), //Photo detail page
-        // child: PhotoListPage(), //Photos list page
+        // child: PhotoInfoPage(), //Photo detail page
+        child: PhotoListPage(), //Photos list page
       ),
     );
   }

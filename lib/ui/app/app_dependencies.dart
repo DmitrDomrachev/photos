@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:photos/data/api/photo_client.dart';
 import 'package:photos/data/repository/photo_repository.dart';
 import 'package:photos/ui/app/app.dart';
 import 'package:photos/ui/screen/photo_list/photo_list_page_model.dart';
@@ -16,10 +18,15 @@ class AppDependencies extends StatefulWidget {
 class _AppDependenciesState extends State<AppDependencies> {
   late final IPhotoRepository _photoRepository;
   late final PhotoListPageModel _photoListPageModel;
+  late final PhotoClient _photoClient;
+  late final Dio _dio;
 
   @override
   void initState() {
-    _photoRepository = PhotoRepositoryDemo();
+    super.initState();
+    _dio = Dio();
+    _photoClient = PhotoClient(_dio);
+    _photoRepository = WebPhotoRepository(_photoClient);
     _photoListPageModel = PhotoListPageModel(_photoRepository);
   }
 
