@@ -49,7 +49,7 @@ class PhotoListPageWidgetModel
     context.goNamed(
       'info',
       queryParameters: <String, String>{
-        'imageUrl': photo.url,
+        'imageUrl': photo.urlFull,
         'title': photo.username,
         'likes': photo.likes.toString(),
       },
