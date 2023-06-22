@@ -32,14 +32,14 @@ class PhotoListPage extends ElementaryWidget<IPhotoPageWM> {
         EntityStateNotifierBuilder(
             listenableEntityState: wm.photos,
             errorBuilder: (_, __, data) {
-              return PhotoGridView(data: data);
+              return PhotoGridView(data: data, onPressed: wm.navigateToPhotoInfo,);
             },
             loadingBuilder: (_, data) {
-              return PhotoGridView(data: data);
+              return PhotoGridView(data: data, onPressed: wm.navigateToPhotoInfo);
             },
             builder: (_, data) {
-              return PhotoGridView(data: data);
-            }),
+              return PhotoGridView(data: data, onPressed: wm.navigateToPhotoInfo);
+            },),
         EntityStateNotifierBuilder(
             listenableEntityState: wm.photos,
             errorBuilder: (_, __, ___) {
@@ -50,7 +50,7 @@ class PhotoListPage extends ElementaryWidget<IPhotoPageWM> {
             },
             builder: (_, data) {
               return const SliverToBoxAdapter();
-            }),
+            },),
       ],
     );
   }

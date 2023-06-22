@@ -3,9 +3,10 @@ import 'package:photos/domain/photo.dart';
 import 'package:photos/ui/screen/photo_list/widgets/image_holder.dart';
 
 class PhotoGridView extends StatelessWidget {
-  const PhotoGridView({super.key, this.data});
+  const PhotoGridView({required this.onPressed, super.key, this.data});
 
   final List<Photo>? data;
+  final Function(Photo) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,9 @@ class PhotoGridView extends StatelessWidget {
               ),
               title: data![index].username,
               subTitle: '${data![index].likes} likes',
+              onPressed: () {
+                onPressed(data![index]);
+              } ,
             );
           },
         ),
