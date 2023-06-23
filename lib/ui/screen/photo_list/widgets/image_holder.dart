@@ -31,7 +31,7 @@ class ImageHolder extends StatelessWidget {
               children: [
                 Image.network(
                   imageUrl,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   loadingBuilder: (
                     context,
                     child,

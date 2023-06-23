@@ -4,7 +4,8 @@ import 'package:photos/domain/photo.dart';
 Photo mapPhoto(dynamic photo) {
   final photoData = photo as PhotoData;
   return Photo(
-    url: photoData.urls.full,
+    urlFull: photoData.urls.full,
+    urlSmall: photoData.urls.small,
     id: photoData.id,
     username: photoData.user.username,
     likes: photoData.likes,

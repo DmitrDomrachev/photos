@@ -12,7 +12,9 @@ class PhotoRepositoryDemo implements IPhotoRepository {
     final photos = List<Photo>.generate(
       10,
       (index) => Photo(
-        url:
+        urlSmall:
+            'https://aif-s3.aif.ru/images/027/309/0c45b779cd95cf33c4f9acef12716837.jpg',
+        urlFull:
             'https://aif-s3.aif.ru/images/027/309/0c45b779cd95cf33c4f9acef12716837.jpg',
         id: (page * photoPerPage + index).toString(),
         username: 'Egor',
