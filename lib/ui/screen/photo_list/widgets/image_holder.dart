@@ -1,16 +1,17 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:photos/res/theme/app_typography.dart';
 
 class ImageHolder extends StatelessWidget {
   const ImageHolder({
-    required this.image,
+    required this.imageUrl,
     super.key,
     this.title,
     this.subTitle,
     this.onPressed,
   });
 
-  final Image image;
+  final String imageUrl;
   final String? title;
   final String? subTitle;
   final VoidCallback? onPressed;
@@ -28,7 +29,20 @@ class ImageHolder extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                image,
+                Image.network(
+                  imageUrl,
+                  fit: BoxFit.fill,
+                  loadingBuilder: (
+                    context,
+                    child,
+                    loadingProgress,
+                  ) {
+                    if (loadingProgress == null) return child;
+                    return const Center(
+                      child: CupertinoActivityIndicator(),
+                    );
+                  },
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 18),
@@ -46,7 +60,7 @@ class ImageHolder extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
