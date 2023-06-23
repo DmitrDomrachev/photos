@@ -7,14 +7,15 @@ class Urls {
   String? raw;
   String full;
   String? regular;
-  String? small;
+  String small;
   String? thumb;
   String? smallS3;
 
   Urls({
-    required this.full, this.raw,
+    required this.full,
+    required this.small,
+    this.raw,
     this.regular,
-    this.small,
     this.thumb,
     this.smallS3,
   });
