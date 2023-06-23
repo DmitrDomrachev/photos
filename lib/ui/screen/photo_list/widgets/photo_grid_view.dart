@@ -26,7 +26,7 @@ class PhotoGridView extends StatelessWidget {
       itemBuilder: (context, index) {
         return ImageHolder(
           key: ValueKey(index.toString()),
-          imageUrl: data![index].url,
+          imageUrl: data![index].urlSmall,
           title: data![index].username,
           subTitle: '${data![index].likes} likes',
           onPressed: () {
